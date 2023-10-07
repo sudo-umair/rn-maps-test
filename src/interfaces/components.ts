@@ -1,5 +1,4 @@
 import { TextStyle, ViewStyle } from 'react-native';
-import { LatLng } from 'react-native-maps';
 
 // UI Components
 

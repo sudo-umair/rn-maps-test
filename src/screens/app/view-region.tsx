@@ -1,29 +1,23 @@
-import { StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import React, { Fragment, useLayoutEffect } from 'react';
 import { ViewRegionScreenProps } from '@/interfaces/screens';
 import MapView, {
+  LatLng,
   Marker,
   PROVIDER_GOOGLE,
   Polygon,
-  Polyline,
   Region,
 } from 'react-native-maps';
 import { Octicons } from '@expo/vector-icons';
 import Button from '@/components/ui/button';
+import { calculateCenterPoint } from '@/helpers/area';
 
 const ViewRegionScreen: React.FC<ViewRegionScreenProps> = ({
   navigation,
   route,
 }) => {
   const { region } = route.params;
-  const { area, id, name, region: coordinates } = region;
-
-  const selectedRegion: Region = {
-    latitude: coordinates[0].latitude,
-    longitude: coordinates[coordinates.length - 1].longitude,
-    latitudeDelta: 0.0992,
-    longitudeDelta: 0.0721,
-  };
+  const { area, name, region: coordinates } = region;
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -40,7 +34,7 @@ const ViewRegionScreen: React.FC<ViewRegionScreenProps> = ({
         showsCompass={false}
         showsMyLocationButton={false}
         showsPointsOfInterest={false}
-        region={selectedRegion}
+        region={calculateCenterPoint(coordinates)}
       >
         {coordinates.length > 0 && (
           <Fragment>

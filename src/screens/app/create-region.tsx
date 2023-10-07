@@ -6,7 +6,6 @@ import MapView, {
   Marker,
   PROVIDER_GOOGLE,
   Polygon,
-  Polyline,
 } from 'react-native-maps';
 import SaveRegionModal from '@/components/create-region/save-region-modal';
 import Button from '@/components/ui/button';
@@ -108,7 +107,6 @@ const CreateRegionScreen: React.FC<CreateRegionScreenProps> = ({
                   />
                 </Marker>
               ))}
-
               <Polygon
                 coordinates={coordinates}
                 strokeColor='rgba(69,103,155,10)'
