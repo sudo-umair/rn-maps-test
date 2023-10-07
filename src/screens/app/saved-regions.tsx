@@ -67,7 +67,7 @@ const SavedRegionsScreen: React.FC<SavedRegionsScreenProps> = ({
             <View style={styles.leftCol}>
               <Text style={styles.name}>{item.name ?? 'Unnamed region'}</Text>
               <Text style={styles.description}>
-                {item.area ?? 'No description'}
+                {`${item.area} sq. ft` ?? 'area not available'}
               </Text>
             </View>
             <View style={styles.rightCol}>
