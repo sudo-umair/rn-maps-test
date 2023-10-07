@@ -15,8 +15,6 @@ const initialRegion = {
 };
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
-  const [permissionStatus, setPermissionStatus] =
-    useState<Location.PermissionStatus>(Location.PermissionStatus.UNDETERMINED);
   const [location, setLocation] = useState<Region | null>(null);
 
   const { error, errorVisible, clearError, setError } = useError();
@@ -26,7 +24,6 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
     (async () => {
       clearError();
       let { status } = await Location.requestForegroundPermissionsAsync();
-      setPermissionStatus(status);
 
       if (status !== Location.PermissionStatus.GRANTED) {
         setError('Permission to access location was denied');
