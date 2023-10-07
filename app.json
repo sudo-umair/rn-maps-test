@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "plugins": [
       [
         "expo-location",
@@ -25,7 +27,8 @@
       "supportsTablet": true,
       "config": {
         "googleMapsApiKey": "AIzaSyBiM0_bbPajrSG-syxGx3HSYds1hGUiTTs"
-      }
+      },
+      "bundleIdentifier": "rnmapstest"
     },
     "android": {
       "adaptiveIcon": {
@@ -36,13 +39,25 @@
         "googleMaps": {
           "apiKey": "AIzaSyBiM0_bbPajrSG-syxGx3HSYds1hGUiTTs"
         }
-      }
+      },
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.FOREGROUND_SERVICE"
+      ],
+      "package": "com.oo_mayr.rnmapstest",
+      "versionCode": 3
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "experiments": {
       "tsconfigPaths": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "32d778c1-ed8b-4e9f-baf2-ec7b6ecd8f0b"
+      }
     }
   }
 }
