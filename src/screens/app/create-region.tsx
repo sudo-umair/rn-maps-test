@@ -1,5 +1,5 @@
-import { Alert, StyleSheet, Text, View } from 'react-native';
-import React, { Fragment, useMemo, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import React, { Fragment, useState } from 'react';
 import MapView, {
   LatLng,
   MapPressEvent,

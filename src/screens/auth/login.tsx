@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, StyleSheet } from 'react-native';
 import React, { useMemo, useState } from 'react';
 import { LoginScreenProps } from '@/interfaces/screens';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -14,10 +14,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, route }) => {
   const initialState: ILoginState = { email: '', password: '' };
 
   const [payload, setPayload] = useState<ILoginState>(() =>
-    deepClone<ILoginState>({
-      email: 'admin@test.com',
-      password: 'Admin123',
-    })
+    deepClone<ILoginState>(initialState)
   );
   const [errors, setErrors] = useState<ILoginState>(
     deepClone<ILoginState>(initialState)

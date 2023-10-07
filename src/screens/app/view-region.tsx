@@ -1,13 +1,7 @@
-import { Alert, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React, { Fragment, useLayoutEffect } from 'react';
 import { ViewRegionScreenProps } from '@/interfaces/screens';
-import MapView, {
-  LatLng,
-  Marker,
-  PROVIDER_GOOGLE,
-  Polygon,
-  Region,
-} from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE, Polygon } from 'react-native-maps';
 import { Octicons } from '@expo/vector-icons';
 import Button from '@/components/ui/button';
 import { calculateCenterPoint } from '@/helpers/area';
@@ -17,7 +11,7 @@ const ViewRegionScreen: React.FC<ViewRegionScreenProps> = ({
   route,
 }) => {
   const { region } = route.params;
-  const { area, name, region: coordinates } = region;
+  const { name, region: coordinates } = region;
 
   useLayoutEffect(() => {
     navigation.setOptions({
