@@ -1,24 +1,34 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import MapView, { PROVIDER_GOOGLE, Region } from 'react-native-maps';
 import { HomeScreenProps } from '@/interfaces/screens';
 import * as Location from 'expo-location';
 import useForceUpdate from '@/hooks/useForceUpdate';
 import Button from '@/components/ui/button';
 import useError from '@/hooks/useError';
-
-const initialRegion = {
-  latitude: 37.78825,
-  longitude: -122.4324,
-  latitudeDelta: 0.0922,
-  longitudeDelta: 0.0421,
-};
+import IconButton from '@/components/ui/icon-button';
+import { AppScreens } from '@/interfaces/common';
+import { Ionicons } from '@expo/vector-icons';
+import { initialRegion } from '@/constants';
+import { errorFlash, warningFlash } from '@/helpers/flash-message';
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
   const [location, setLocation] = useState<Region | null>(null);
 
   const { error, errorVisible, clearError, setError } = useError();
   const { forceUpdate, trigger } = useForceUpdate();
+
+  const handleNavigate = () => navigation.navigate(AppScreens.SavedRegions);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <IconButton onPress={handleNavigate}>
+          <Ionicons name='list' size={24} color='black' />
+        </IconButton>
+      ),
+    });
+  }, [navigation]);
 
   useEffect(() => {
     (async () => {
@@ -27,12 +37,14 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
 
       if (status !== Location.PermissionStatus.GRANTED) {
         setError('Permission to access location was denied');
+        errorFlash('Permission to access location was denied');
         return;
       }
 
       let location = await Location.getCurrentPositionAsync({});
       if (!location) {
         setError('Location not found');
+        warningFlash('Location not found');
         return;
       }
 
@@ -55,16 +67,20 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
   }
 
   return (
-    <MapView
-      provider={PROVIDER_GOOGLE}
-      style={styles.map}
-      showsUserLocation
-      showsCompass
-      showsMyLocationButton
-      region={location ?? initialRegion}
-      initialRegion={initialRegion}
-      showsPointsOfInterest
-    ></MapView>
+    <React.Fragment>
+      <View style={styles.root}>
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={styles.map}
+          showsUserLocation
+          showsCompass
+          showsMyLocationButton
+          showsPointsOfInterest
+          region={location ?? initialRegion}
+          initialRegion={initialRegion}
+        ></MapView>
+      </View>
+    </React.Fragment>
   );
 };
 

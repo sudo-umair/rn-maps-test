@@ -1,11 +1,13 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { appStateSlice } from './app-state.slice';
+import { savedRegionSlice } from './saved-regions-state.slice';
 import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
 
 const reducers = combineReducers({
   appState: appStateSlice.reducer,
+  savedRegions: savedRegionSlice.reducer,
 });
 
 const persistConfig = {

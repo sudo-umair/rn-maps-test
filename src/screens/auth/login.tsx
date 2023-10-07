@@ -8,6 +8,7 @@ import { ILoginState } from '@/interfaces/data';
 import { deepClone } from '@/helpers/functions';
 import { useAppDispatch } from '@/redux/store';
 import { login } from '@/redux/app-state.slice';
+import { successFlash, warningFlash } from '@/helpers/flash-message';
 
 const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, route }) => {
   const initialState: ILoginState = { email: '', password: '' };
@@ -75,6 +76,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, route }) => {
       );
       return false;
     }
+    warningFlash('Login failed, please try again');
     return true;
   };
 
@@ -82,6 +84,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, route }) => {
     resetAllErrors();
     if (validate(payload)) {
       dispatch(login());
+      successFlash('Login successful');
     }
   };
 

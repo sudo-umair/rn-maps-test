@@ -4,6 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import { store, persistor } from '@/redux/store';
 import { PersistGate } from 'redux-persist/es/integration/react';
 import { Provider } from 'react-redux';
+import FlashMessage from 'react-native-flash-message';
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
           <AppNavigator />
         </PersistGate>
       </Provider>
+      <FlashMessage hideOnPress floating position={'center'} />
       <StatusBar style='auto' />
     </View>
   );

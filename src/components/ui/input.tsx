@@ -14,6 +14,8 @@ const Input: React.FC<IInputProps> = ({
   placeholder,
   secureTextEntry,
 }) => {
+  const [selected, setSelected] = React.useState(false);
+
   return (
     <View style={[styles.container, containerStyle]}>
       {label && <Text style={[styles.label, labelStyle]}>{label}</Text>}
@@ -21,9 +23,11 @@ const Input: React.FC<IInputProps> = ({
       <TextInput
         onChangeText={onChangeText}
         value={value}
-        style={[styles.input, inputStyle]}
+        style={[styles.input, inputStyle, selected && styles.selected]}
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
+        onFocus={() => setSelected(true)}
+        onBlur={() => setSelected(false)}
       />
       {error && <Text style={[styles.error, errorStyle]}>{error}</Text>}
     </View>
@@ -38,15 +42,21 @@ const styles = StyleSheet.create({
     margin: 8,
   },
   label: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
-    marginBottom: 8,
+    marginBottom: 4,
+    marginHorizontal: 4,
   },
   input: {
     backgroundColor: '#fff',
     borderRadius: 8,
     padding: 12,
+    paddingHorizontal: 6,
     fontSize: 16,
+  },
+  selected: {
+    borderColor: '#000',
+    borderWidth: 1,
   },
   error: {
     fontSize: 12,

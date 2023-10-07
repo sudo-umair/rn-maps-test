@@ -13,3 +13,18 @@ export type HomeScreenProps = NativeStackScreenProps<
   AppStackParamList,
   AppScreens.Home
 >;
+
+export type SavedRegionsScreenProps = NativeStackScreenProps<
+  AppStackParamList,
+  AppScreens.SavedRegions
+>;
+
+export type CreateRegionScreenProps = NativeStackScreenProps<
+  AppStackParamList,
+  AppScreens.CreateRegion
+>;
+
+export type ViewRegionScreenProps = NativeStackScreenProps<
+  AppStackParamList,
+  AppScreens.ViewRegion
+>;
