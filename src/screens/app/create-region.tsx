@@ -31,48 +31,12 @@ const CreateRegionScreen: React.FC<CreateRegionScreenProps> = ({
 
   const dispatch = useAppDispatch();
 
-  const isRegionClosed = useMemo(() => {
-    if (coordinates.length < 2) return false;
-
-    const firstPoint = coordinates[0];
-    const lastPoint = coordinates[coordinates.length - 1];
-
-    return (
-      firstPoint.latitude === lastPoint.latitude &&
-      firstPoint.longitude === lastPoint.longitude
-    );
-  }, [coordinates]);
-
   const checkCoordinates = (coordinates: LatLng[]) => {
-    const firstPoint = coordinates[0];
-    const lastPoint = coordinates[coordinates.length - 1];
-
-    if (coordinates.length < 4) {
-      warningFlash('You need at least 4 points to create a region');
+    if (coordinates.length < 3) {
+      warningFlash('You need at least 3 points to create a region');
       return false;
-    } else if (!isRegionClosed) {
-      Alert.alert(
-        'Region not closed',
-        'The first and last point of the region must be the same',
-        [
-          {
-            text: 'OK',
-            onPress: () => {
-              return false;
-            },
-          },
-          {
-            text: 'Close region',
-            onPress: () => {
-              setCoordinates((prev) => [...prev, firstPoint]);
-              return true;
-            },
-          },
-        ]
-      );
-    } else {
-      return true;
     }
+    return true;
   };
 
   const handleUndo = () => {
@@ -159,8 +123,8 @@ const CreateRegionScreen: React.FC<CreateRegionScreenProps> = ({
             <View style={styles.buttonContainer}>
               <Button
                 containerStyle={{ flex: 1 }}
-                label={isRegionClosed ? 'Save' : 'Finish'}
-                disabled={coordinates.length < 4}
+                label={'Save'}
+                disabled={coordinates.length < 3}
                 onPress={handleFinishDrawing}
               />
               <Button
