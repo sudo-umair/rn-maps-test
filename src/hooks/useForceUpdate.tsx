@@ -1,5 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 const useForceUpdate = () => {
   const [value, setValue] = useState<number>(0);
